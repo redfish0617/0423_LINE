@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Notification";
+}
+
+
+<h2>Notification</h2>
+<textarea id="message" style="height:300px"></textarea>
+<button type="button" id="send">送出</button>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#send').on("click", function () {
+                $.ajax({
+                    url: '@Url.Action("SendMessage")',
+                    type: 'POST',
+                    contentType: "application/json",
+                    cache: false,
+                    dataType: "html",
+                    data: "{ Message:'" + $("#message").val() + "'}",
+                    async: false,
+                    success: function () { alert('傳送成功'); },
+                    error: function () { alert('傳送失敗'); }
+                })
+            })
+        })
+    </script>
+}

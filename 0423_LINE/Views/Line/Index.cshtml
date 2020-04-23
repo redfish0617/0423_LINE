@@ -1,0 +1,11 @@
+﻿@model _0423_LINE.Models.LineAuthorizeModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<form action="https://notify-bot.line.me/oauth/authorize" method="get">
+    @Html.EditorForModel() 
+    <button type="submit"> 請求Code</button>
+</form>

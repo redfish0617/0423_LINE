@@ -1,0 +1,12 @@
+﻿@model _0423_LINE.Models.LineTokenModel
+
+@{
+    ViewBag.Title = "CodeReturn";
+}
+
+@using (Html.BeginForm("Notification", "Line", FormMethod.Post))
+{
+    @Html.EditorForModel()
+    <button type="submit" id="getToken"> 請求Token</button>
+   
+}
