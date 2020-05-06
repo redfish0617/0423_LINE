@@ -22,6 +22,7 @@ namespace _0423_LINE.Controllers
             if (cookie == null || String.IsNullOrEmpty(cookie.Value))
             {
                 ViewBag.Title = "Line Notify";
+                //HttpGet
                 LineAuthorizeModel model = new LineAuthorizeModel()
                 {
                     response_type = "code",
@@ -44,6 +45,7 @@ namespace _0423_LINE.Controllers
             HttpCookie cookie = Request.Cookies["State"];
             if (state.Equals(cookie.Value.ToString()))
             {
+                //HttpPost
                 LineTokenModel tokenModel = new LineTokenModel()
                 {
                     code= code,
@@ -84,6 +86,7 @@ namespace _0423_LINE.Controllers
                 {
                     //跟Line取得Token的code
                     http.BaseAddress = new Uri("https://notify-bot.line.me");
+                    //HttpPost
                     var content = new FormUrlEncodedContent(new[]
                     {
                         new KeyValuePair<string, string>("grant_type", m.grant_type),
