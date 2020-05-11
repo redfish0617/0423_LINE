@@ -32,8 +32,6 @@ namespace _0423_LINE.Controllers
                     state = Guid.NewGuid().ToString(),
                     responsemode = "form_post"
                 };
-                HttpCookie cookieState = new HttpCookie("State", model.state);
-                Response.Cookies.Add(cookieState);
                 return View(model);
             } 
             //有token的話 前往Notify功能
@@ -60,18 +58,17 @@ namespace _0423_LINE.Controllers
         }
         public ActionResult SendMessage(string Message ="")
         {
-            
-            HttpCookie cookie = Request.Cookies["LineToken"];
+
             using (HttpClient httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri("https://notify-api.line.me");
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", cookie.Value);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "JqwAPLzBcnyckB7xQ1QYS0xnunX3NqpxKKCZ9fnPHWE");
                 var content = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("message", Message) });
                 using (HttpResponseMessage message = httpClient.PostAsync("/api/notify", content).Result)
                 {
                     //傳送訊息
                     return new HttpStatusCodeResult(message.StatusCode);
-                }           
+                }
             }
         }
         public ActionResult Notification(LineTokenModel m)
